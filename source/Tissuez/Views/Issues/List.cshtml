@@ -1,0 +1,61 @@
+﻿@using Octokit
+@model Tissuez.Models.SearchResults
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("_SearchBox", Model.SearchRequest)
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>No.</td>
+            <td>State</td>
+            <td>Assigned To</td>
+            <td>Milestone</td>
+            <td>Labels</td>
+            <td>Title</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var issue in Model.Issues)
+        {
+            <tr>
+                <td>@issue.Number</td>
+                <td>
+                    @if (issue.State == ItemState.Open)
+                    {
+                        <span class="label label-default">open</span>
+                    }
+                    else
+                    {
+                        <span class="label label-primary">closed</span>
+                    }
+                    
+                </td>
+                <td>
+                    @if (issue.Assignee != null)
+                    {
+                        @issue.Assignee.Name
+                    }
+                </td>
+                <td>
+                    @if (issue.Milestone != null)
+                    {
+                        @issue.Milestone.Title
+                    }
+                    
+                </td>
+                <td>
+                    @foreach (var label in issue.Labels)
+                    {
+                        <span class="label" style="background-color: #@label.Color;">@label.Name</span>
+                    }
+                </td>
+                <td>@issue.Title</td>
+                
+            </tr>
+        }
+    </tbody>
+</table>
