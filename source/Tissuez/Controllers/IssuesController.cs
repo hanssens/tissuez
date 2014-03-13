@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Tissuez.Application.Helpers;
 using Tissuez.Models;
 
 namespace Tissuez.Controllers
@@ -34,12 +35,24 @@ namespace Tissuez.Controllers
                     SearchRequest = command
                 };
 
+            TempData["search_results"] = model.Issues;
             return View(model);
         }
 
-        public ActionResult Export(SearchCommand command)
+        [HttpPost]
+        public ActionResult Export()
         {
-            return View();
+            var issues = TempData["search_results"] as IEnumerable<Issue>;
+            foreach (var i in issues)
+            {
+                i.Body = string.Empty;
+                i.Labels = null;
+            }
+            
+            var exporter = new CsvExport<Issue>(issues);
+            var bytes = exporter.ExportToBytes(seperatorChar: ';');
+            
+            return File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet, "issues.csv");
         }
     }
 }

@@ -4,15 +4,8 @@
     @Html.TextBoxFor(m => m.RepositoryOwner, new { placeholder = "owner", type = "search"})
     @Html.TextBoxFor(m => m.RepositoryName, new { placeholder = "repository", type = "search"})
     @Html.TextBoxFor(m => m.ApiKey, new { placeholder = "(optional) your apikey", type = "search"})
-    @*<input type="search" name="RepositoryOwner" placeholder="owner"/>
-    <input type="search" name="RepositoryName" placeholder="repository"/>
-    <input type="search" name="ApiKey" placeholder="(optional) your apikey"/>*@
     <button type="submit" class="btn btn-primary" value="find">find</button>
     
-    if (Model.ResultsFound)
-    {
-        @*<a href="@Url.Action("Export", "Issues", new { command = Model })" class="btn btn-primary">export</a>*@
-    }
 }
 
 <hr />

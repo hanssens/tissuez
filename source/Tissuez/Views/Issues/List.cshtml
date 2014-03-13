@@ -7,6 +7,14 @@
 
 @Html.Partial("_SearchBox", Model.SearchRequest)
 
+@if (Model.SearchRequest.ResultsFound)
+{
+    using (Html.BeginForm("Export", "Issues"))
+    {
+        <button type="submit" class="btn btn-primary">export</button>
+    }
+}
+
 <table class="table">
     <thead>
         <tr>

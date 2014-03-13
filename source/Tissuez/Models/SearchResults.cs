@@ -9,10 +9,5 @@ namespace Tissuez.Models
     {
         public IEnumerable<Octokit.Issue> Issues { get; set; }
         public SearchCommand SearchRequest { get; set; }
-
-        public SearchResults()
-        {
-            
-        }
     }
 }
