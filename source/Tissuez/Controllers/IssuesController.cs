@@ -9,6 +9,7 @@ using Tissuez.Models;
 
 namespace Tissuez.Controllers
 {
+    [Authorize]
     public class IssuesController : Controller
     {
         public ActionResult Overview()
